@@ -18,3 +18,6 @@
 # y = os.strip("'")
 # print(x)
 # print(y)
+
+
+`async with await anyio.open_file(...`

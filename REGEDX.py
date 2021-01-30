@@ -1,9 +1,9 @@
 import re
 
-line = "blahblahblahWIN10\Yabba dabba do"
+line = "b'bowser,Windows'"
 
 
-searchObj = re.search(('(?<=WIN10\\\)\w+'), line)
+searchObj = re.search('([^,]*), line\)
 
 if searchObj:
    print (searchObj.group())
@@ -25,7 +25,7 @@ else:
 
 #{'win10.openstacklocal': False}
 
-cider = (False['win10.openstacklocal'])
+
 
 
 
