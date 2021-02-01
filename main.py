@@ -57,18 +57,14 @@ def findw(myuserw):
             searchObj = re.search(('(?<=\\\)\w+'), userw)
             if searchObj:
                 userw = searchObj.group()
-                print('we think user', userw, 'is logged into', y)
             else:
                 userw = 'null'
-                print('we think nobody is logged into', y)
             if userw == myuserw:
                 comp5u = y
                 return comp5u
-                print('this shouldnothappen')
 
             if userw == 'null':
                 comp5u = y
-                print('since nobody is loged into', y, 'were setting comp5u equal to it')
             else:
                 comp5u = 'used'
     if comp5u == 'used':
@@ -90,12 +86,12 @@ with sock as s:
             os = op.strip("'")
             if os == 'Centos':
                 answer = findl(user2).encode()
-                conn.sendall(answer)
-                conn.close()
-            if os == 'Windows':
+            elif os == 'Windows':
                 answer = findw(user2).encode()
-                conn.sendall(answer)
-                conn.close()
+            else:
+                answer = ('Received data incorrectly formatted, terminating connection').encode()
+            conn.sendall(answer)
+            conn.close()
 
 
 

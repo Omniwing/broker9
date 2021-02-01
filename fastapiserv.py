@@ -90,12 +90,12 @@ with sock as s:
             os = op.strip("'")
             if os == 'Centos':
                 answer = findl(user2).encode()
-                conn.sendall(answer)
-                conn.close()
-            if os == 'Windows':
+            elif os == 'Windows':
                 answer = findw(user2).encode()
-                conn.sendall(answer)
-                conn.close()
+            else:
+                answer = ('Received data incorrectly formatted, terminating connection').encode()
+            conn.sendall(answer)
+            conn.close()
 
 
 
