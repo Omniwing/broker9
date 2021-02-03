@@ -29,6 +29,7 @@ def findl(myuser):
             if user == myuser:
                 comp4u = x
                 return comp4u
+                break
 
             if user == 'null':
                 comp4u = x
@@ -62,7 +63,7 @@ def findw(myuserw):
             if userw == myuserw:
                 comp5u = y
                 return comp5u
-
+                break
             if userw == 'null':
                 comp5u = y
             else:
