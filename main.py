@@ -33,6 +33,8 @@ def findl(myuser):
 
             if user == 'null':
                 comp4u = x
+                return comp4u
+                break
 
             else:
                 comp4u = 'used'
@@ -66,6 +68,8 @@ def findw(myuserw):
                 break
             if userw == 'null':
                 comp5u = y
+                return comp5u
+                break
             else:
                 comp5u = 'used'
     if comp5u == 'used':
