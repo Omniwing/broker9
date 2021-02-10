@@ -36,7 +36,6 @@ def findl(myuser):
                 comp4u = x
                 with open(logfile, 'a') as file:
                      file.write(str(now) +": User \"" + str(myuser) + "\" is already logged into " + str(comp4u) + ", attempting to reconnect\n")
-                #                basiclogging.info("%s already logged into %s, attempting reconnect",  myuser, comp4u)
                 return comp4u
                 break
 
@@ -60,6 +59,7 @@ def findl(myuser):
          return comp4u
 
 def findw(myuserw):
+    now = time.strftime("%b %d %Y %-I:%M %p")
     retw = client.cmd('os:Windows',
                      'state.sls',
                      ['whois'],
@@ -69,7 +69,8 @@ def findw(myuserw):
     keylistw = list(retw.keys())
     for y in keylistw:
         if not retw[y]:
-#            basiclogging.info("%s is unresponsive", y)
+            with open(logfile, 'a') as file:
+                file.write(str(now2) +": " + str(y) + " is unresponsive!\n")
             continue
         else:
             userw = retw[y]['cmd_|-find_user_win_|-Get-WmiObject -ComputerName localhost -Class Win32_ComputerSystem | Select-Object UserName_|-run']['changes']['stdout']
@@ -80,18 +81,22 @@ def findw(myuserw):
                 userw = 'null'
             if userw == myuserw:
                 comp5u = y
+                with open(logfile, 'a') as file:
+                     file.write(str(now) +": User \"" + str(myuserw) + "\" is already logged into " + str(comp5u) + ", attempting to reconnect\n")
 #                basiclogging.info("%s already logged into %s, attempting reconnect", myuserw, comp5u)
                 return comp5u
                 break
             if userw == 'null':
                 comp5u = y
-#                basiclogging.info("assigning %s figured" % (y))
+                with open(logfile, 'a') as file:
+                    file.write(str(now) + ": Found vacant VM \"" + str(comp5u) + "\", assigning to " + str(myuserw) + "\n")
                 return comp5u
                 break
             else:
                 comp5u = 'used'
     if comp5u == 'used':
-#        basiclogging.info("No vacant VMs found")
+        with open(logfile, 'a') as file:
+            file.write(str(now) + ": All VMs in use\n")
         return 'all vms in use'
     else:
 #        basiclogging.info("Found vacant VM %s for %s", y, myuserw)

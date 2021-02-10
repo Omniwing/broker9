@@ -11,3 +11,7 @@ Feb 09 2021 3:14 PM: Found vacant VM "saltminion2", assigning to bbber
 Feb 09 2021 4:20 PM: Found vacant VM "saltminion2", assigning to bbber
 Feb 09 2021 4:21 PM: Found vacant VM "saltminion2", assigning to bbber
 Feb 09 2021 4:22 PM: Found vacant VM "saltminion2", assigning to bbber
+Feb 10 2021 1:19 PM: User "bob" is already logged into win10minion2, attempting to reconnect
+Feb 10 2021 1:19 PM: All VMs in use
+Feb 10 2021 1:20 PM: User "bob" is already logged into win10minion2, attempting to reconnect
+Feb 10 2021 1:20 PM: Found vacant VM "win10.openstacklocal", assigning to bobf
