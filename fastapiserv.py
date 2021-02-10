@@ -88,10 +88,6 @@ def findw(myuserw):
                 break
             if userw == 'null':
                 comp5u = y
-                with open(logfile, 'a') as file:
-                    file.write(str(now) + ": Found vacant VM \"" + str(comp5u) + "\", assigning to " + str(myuserw) + "\n")
-                return comp5u
-                break
             else:
                 comp5u = 'used'
     if comp5u == 'used':
@@ -99,8 +95,10 @@ def findw(myuserw):
             file.write(str(now) + ": All VMs in use\n")
         return 'all vms in use'
     else:
-#        basiclogging.info("Found vacant VM %s for %s", y, myuserw)
+        with open(logfile, 'a') as file:
+            file.write(str(now) + ": Found vacant VM \"" + str(comp5u) + "\", assigning to " + str(myuserw) + "\n")
         return comp5u
+
 
 with sock as s:
     s.bind(server_address)

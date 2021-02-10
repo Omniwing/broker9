@@ -15,3 +15,8 @@ Feb 10 2021 1:19 PM: User "bob" is already logged into win10minion2, attempting 
 Feb 10 2021 1:19 PM: All VMs in use
 Feb 10 2021 1:20 PM: User "bob" is already logged into win10minion2, attempting to reconnect
 Feb 10 2021 1:20 PM: Found vacant VM "win10.openstacklocal", assigning to bobf
+Feb 10 2021 1:25 PM: Found vacant VM "win10.openstacklocal", assigning to bob
+Feb 10 2021 1:26 PM: Found vacant VM "win10.openstacklocal", assigning to bob
+Feb 10 2021 1:28 PM: User "bob" is already logged into win10minion2, attempting to reconnect
+Feb 10 2021 1:28 PM: Found vacant VM "win10.openstacklocal", assigning to bobr
+Feb 10 2021 1:28 PM: User "bob" is already logged into win10minion2, attempting to reconnect
