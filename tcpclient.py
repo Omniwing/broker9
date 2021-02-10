@@ -5,7 +5,7 @@ print('[+] Connecting to %s Port %s' % server_address)
 
 with sock as s:
     s.connect((server_address))
-    s.sendall(b'bobber,Windows')
+    s.sendall(b'bbber,Centos')
     datab = s.recv(512)
 
 print('Received', repr(datab))

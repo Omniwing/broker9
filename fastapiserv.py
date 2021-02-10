@@ -1,13 +1,14 @@
-import logging
-import salt.client
 import re
 import socket
-logging.basicConfig(filename='broker.log', level=logging.DEBUG)
+import salt.client
+import time
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server_address = ('localhost', 10000)
 client = salt.client.LocalClient()
+logfile = "/root/PycharmProjects/pythonProject/venv/broker9/work2.log"
 
 def findl(myuser):
+    now = time.strftime("%b %d %Y %-I:%M %p")
     retl = client.cmd('os:Centos',
                      'state.sls',
                      ['whois'],
@@ -18,7 +19,10 @@ def findl(myuser):
     keylist = list(retl.keys())
     for x in keylist:
         if (retl[x] == False):  #if the machine is known but unresponsive it will return keyname False
-            logging.info("%s is unresponsive", x)
+            print(x, "is unresponsive")
+
+            with open(logfile, 'a') as file:
+                file.write(str(now) + ": " + str(x) + "is unresponsive!\n")
             continue
         else:
             username = ((retl[x]['module_|-find_user_linux_|-status.w_|-run']['changes'])) #digging into nested dicts
@@ -30,21 +34,30 @@ def findl(myuser):
                 user = (username3['user'])
             if user == myuser:
                 comp4u = x
-                logging.info("%s already logged into %s, attempting reconnect",  myuser, comp4u)
+                with open(logfile, 'a') as file:
+                     file.write(str(now) +": User \"" + str(myuser) + "\" is already logged into " + str(comp4u) + ", attempting to reconnect\n")
+                #                basiclogging.info("%s already logged into %s, attempting reconnect",  myuser, comp4u)
                 return comp4u
                 break
 
             if user == 'null':
                 comp4u = x
-
+                with open(logfile, 'a') as file:
+                    file.write(str(now) + ": Found vacant VM \"" + str(comp4u) + "\", assigning to " + str(myuser) + "\n")
+                return comp4u
             else:
                 comp4u = 'used'
     if comp4u == 'used':
-        logging.info("No vacant VMs found")
-        return 'all vms in use'
+         with open(logfile, 'a') as file:
+            file.write(str(now) +": All VMs in use\n")
+#        basiclogging.info("No vacant VMs found")
+         return 'all vms in use'
     else:
-        logging.info("Found vacant VM %s for %s",  comp4u, myuser)
-        return comp4u
+         print("found vacant vm", comp4u, "assigning to", myuser)
+#         with open(logfile, 'a') as file:
+#            file.write(str(now) + ": Found vacant VM \"" + str(comp4u) + "\", assigning to " + str(myuser) + "\n")
+#        basiclogging.info("Found vacant VM %s for %s",  comp4u, myuser)
+         return comp4u
 
 def findw(myuserw):
     retw = client.cmd('os:Windows',
@@ -56,7 +69,7 @@ def findw(myuserw):
     keylistw = list(retw.keys())
     for y in keylistw:
         if not retw[y]:
-            logging.info("%s is unresponsive", y)
+#            basiclogging.info("%s is unresponsive", y)
             continue
         else:
             userw = retw[y]['cmd_|-find_user_win_|-Get-WmiObject -ComputerName localhost -Class Win32_ComputerSystem | Select-Object UserName_|-run']['changes']['stdout']
@@ -67,18 +80,21 @@ def findw(myuserw):
                 userw = 'null'
             if userw == myuserw:
                 comp5u = y
-                logging.info("%s already logged into %s, attempting reconnect", myuserw, comp5u)
+#                basiclogging.info("%s already logged into %s, attempting reconnect", myuserw, comp5u)
                 return comp5u
                 break
             if userw == 'null':
                 comp5u = y
+#                basiclogging.info("assigning %s figured" % (y))
+                return comp5u
+                break
             else:
                 comp5u = 'used'
     if comp5u == 'used':
-        logging.info("No vacant VMs found")
+#        basiclogging.info("No vacant VMs found")
         return 'all vms in use'
     else:
-        logging.info("Found vacant VM %s for %s", y, myuserw)
+#        basiclogging.info("Found vacant VM %s for %s", y, myuserw)
         return comp5u
 
 with sock as s:
@@ -87,20 +103,20 @@ with sock as s:
     while True:
         conn, addr = s.accept()
         with conn:
-            logging.info("Connected by %s:%s", *addr)
+#            basiclogging.info("Connected by %s:%s", *addr)
             data = conn.recv(512)
             datars = data.decode("utf-8")
             username2, sep, op = datars.partition(",")
             user2 = username2.strip("''")
             os = op.strip("'")
-            logging.info("User %s is requesting %s VM", user2, os)
+#            basiclogging.info("User %s is requesting %s VM", user2, os)
             if os == 'Centos':
                 answer = findl(user2).encode()
             elif os == 'Windows':
                 answer = findw(user2).encode()
             else:
                 answer = ('Received data incorrectly formatted, terminating connection').encode()
-                logging.info("Received data was incorrectly formatted, connection terminated")
+#                basiclogging.info("Received data was incorrectly formatted, connection terminated")
             conn.sendall(answer)
             conn.close()
 

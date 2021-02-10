@@ -1,4 +1,4 @@
-INFO:root:starting up TCP server
+INFO:root:yeah it wis creepy
 DEBUG:salt.utils.decorators.jinja:Marking 'to_bytes' as a jinja filter
 DEBUG:salt.utils.decorators.jinja:Marking 'to_num' as a jinja filter
 DEBUG:salt.utils.decorators.jinja:Marking 'str_to_num' as a jinja filter
@@ -87,15 +87,4 @@ DEBUG:salt.utils.decorators.jinja:Marking 'method_call' as a jinja filter
 DEBUG:salt.utils.decorators.jinja:Marking 'yaml_dquote' as a jinja filter
 DEBUG:salt.utils.decorators.jinja:Marking 'yaml_squote' as a jinja filter
 DEBUG:salt.utils.decorators.jinja:Marking 'yaml_encode' as a jinja filter
-DEBUG:salt.config:Reading configuration from /etc/salt/master
-DEBUG:salt.config:Missing configuration file: /root/.saltrc
-DEBUG:salt.utils.event:MasterEvent PUB socket URI: /var/run/salt/master/master_event_pub.ipc
-DEBUG:salt.utils.event:MasterEvent PULL socket URI: /var/run/salt/master/master_event_pull.ipc
-INFO:root:starting up TCP server
-INFO:root:Connected by 127.0.0.1:35304
-INFO:root:User bobber is requesting Windows VM
-INFO:root:assigning win10minion2 figured
-INFO:root:starting up TCP server
-INFO:root:Connected by 127.0.0.1:37730
-INFO:root:User bobber is requesting Windows VM
-INFO:root:assigning win10minion2 figured
+INFO:root:teatiowjeofijweoifj creepy

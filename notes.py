@@ -18,9 +18,22 @@
 # y = os.strip("'")
 # print(x)
 # print(y)
-
+print(f'{now}: returning hostname', file=file, flush=True)
 
 `async with await anyio.open_file(...`
 
 #when you do logging.info('foo: %s' % expensive), you're crafting that 'foo: <expensive>' string in memory immediately, even if you're not logging that debug message based on your debug level
 #contrast to logging.info('foo: %s', expensive) -- this is much less expensive in memory, because logging will defer evaluating that string until later when the debug is actually executing
+
+#!/usr/bin/python3
+
+# # Function definition is here
+# def sum( arg1, arg2 ):
+#    total = arg1 + arg2
+#    print ("Inside the function : ", total)
+#    return total
+#
+# # Now you can call sum function
+# total2 = sum( 10, 20 )
+# #print ("Outside the function : ", total2 )
+# print(sum(12, 20))
